@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=c
+comment0.target=WordPile(int)
+comment1.params=
+comment1.target=void\ pushchar()
+comment2.params=
+comment2.target=void\ popchar()
+comment3.params=
+comment3.target=void\ array()
+comment4.params=
+comment4.target=void\ choice()
+comment5.params=
+comment5.target=void\ main()
+numComments=6
