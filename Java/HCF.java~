@@ -1,0 +1,23 @@
+public class HCF
+{
+    public static void main(int a,int b)
+    {
+        int rem=1;
+        if(a<b)
+        {a=b;
+         b=a;
+        }
+        while(rem>0)
+        {
+            rem=a%b;
+            if(rem!=0)
+            {
+            a=b;
+            b=rem;
+        }
+        else
+        {break;}
+        }
+        System.out.println("HCF is "+b);
+    }
+}

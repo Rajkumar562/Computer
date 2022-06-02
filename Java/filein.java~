@@ -1,0 +1,21 @@
+import java.util.*;
+public class filein
+{
+    public static void main()
+    {
+        FileWriter fout=new FileWriter("check.txt");
+        BufferedWriter bout=new BufferedWriter(fout);
+        PrintWriter pout=new PrintWriter(bout);
+        
+        String n;
+        while(n=bin.readLine()!=null)
+        {
+            pout.println(n);
+        }
+        bin.close();
+        fin.close();
+        pout.close();
+        bout.close();
+        fout.close();
+    }
+}
