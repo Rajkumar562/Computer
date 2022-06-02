@@ -1,0 +1,18 @@
+import java.util.ArrayList;
+public class ardf
+{
+    public static void main()
+    {
+        ArrayList <String> ft=new ArrayList();
+        ft.add("Slakoth");
+        ft.add("Dragonite");
+        ft.add("Rhyperior");
+        System.out.println(ft);
+        String temp[]=new String[ft.size()];
+        ft.toArray(temp);
+        for(String t:ft.size())
+        {
+            System.out.println(t);
+        }
+    }
+}

@@ -1,0 +1,12 @@
+public class Calendar
+{
+    public static void main(int da,int mo,int yr)
+    {
+        String a="Sunday";
+        String b="Monday";
+        String c="Tuesday";
+        String d="Wednesday";
+        String e="Thursday";
+        String f="Friday";
+        String g="Saturday";
+        

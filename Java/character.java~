@@ -1,0 +1,7 @@
+public class character
+{
+        public static void main()
+        {
+            System.out.println(Character.toLowerCase('A'));
+        }
+    }
