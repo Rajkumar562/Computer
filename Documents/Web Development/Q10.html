@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      ul {
+        list-style-type: none;
+        
+        overflow: hidden;
+        background-color: blue;
+      }
+      li {
+        float: left;
+      }
+      li a,
+      .dropbt {
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      li a:hover,
+      .dropdown:hover .dropbt {
+        background-color: blue;
+      }
+      li.dropdown {
+        display: inline-block;
+      }
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: blue;       
+      }
+      .dropdown-content a {
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+      }
+      .dropdown-content a:hover {
+        background-color: blue;
+      }
+      .dropdown:hover .dropdown-content
+       {
+        display: block;
+      }
+      p{
+      				font: 30px Arial;
+      				color: white;
+      				background: blue;
+      }
+      nav{
+      font: 30px Arial;
+      color: blue;
+      font-weight: bold;  
+    </style>
+  </head>
+  
+  <body>
+  				
+  				<img src="index.jpg" alt="logo" width="500">
+    <ul>
+      <li><a href="#home">HOME</a></li>
+     
+      <li><a href="#">ADMISSIONS</a></li>
+      <li class="dropdown" style="margin-left: 35px;">
+        <a href="" class="dropbt">FACILITIES</a>
+        <div class="dropdown-content">
+          <a href="#">Courses Offered</a>
+          <a href="https://www.rajdhanicollege.ac.in/Base/science-labs">Science Labs</a>
+          <a href="https://www.rajdhanicollege.ac.in/Base/library">Library</a>        
+          <a href="https://www.rajdhanicollege.ac.in/Base/canteen">Canteen</a>
+          <a href="https://www.rajdhanicollege.ac.in/Base/auditorium">Auditorium </a>
+        </div>
+      </li>
+      <li><a href="#">VACANCIES</a></li>
+      <li><a href="#news" style="margin-left: 35px;">CONTACT US</a></li>
+    </ul>
+  <h1>WELCOME TO RAJDHANI COLLEGE</h1>
+  <img src="raj.png" alt="" height="200" weight="600">
+  <hr> 
+  <p class="text">
+  				<b>Rajdhani College</b> was established in 1964 by the Delhi Administration under the name 
+          of <i>Government College</i> and was renamed as Rajdhani College when the Delhi administration 
+          vested its governance in an autonomous Governing Body. 
+  		</p>
+  		<p>
+  						<nav>
+  				Rajdhani College is a constituent college of the University of Delhi and has completed 
+          50 glorious years of academic excellence.
+  				</nav>
+  </p> 
+       
+  </body>
+</html>

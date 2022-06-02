@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Payment Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="box">
+    <form method="POST">
+        <h1>Payment Form</h1><hr>
+        <h2>Contact Information</h2><br>
+        <p>Name: *<input type="text" name="name" id="h" required></p>
+        <fieldset> 
+            <legend>Gender *</legend>
+            <p>Male <input type="radio" name="gender" id="" required></p>
+            <p>Female<input type="radio" name="gender" id="" required></p>
+        </fieldset> 
+        <p>
+            Address: <br><textarea name="address" id="1" cols="50" rows="5"></textarea>
+        </p>
+        <p>Email: *<input type="email" name="email" id="email" required></p>
+        <p>Pincode: *<input type="number" name="pincode" id="pincode" required placeholder="123456"></p>
+        <hr>
+        <h2>Card Details</h2 id="hello"><br>
+        <p>Card Type: *
+            <select name="card type" id="card type" required>
+                <option value="">--Select--</option>
+                <option value="rupay">Rupay</option>
+                <option value="mastercard">MasterCard</option>
+                <option value="visa">Visa</option>
+            </select>
+        </p>
+        <p>Card Number: *<input type="number" name="card number" id="card number" required></p>
+        <p>Expiration Date: *<input type="date" name="exp date" id="exp date" required></p>
+        <p>CVV: *<input type="password" name="cvv" id="cvv" required></p>
+        <p>Would you like to save your card information on this site?
+            <input type="checkbox" name="yes" id="">Yes, I would love to
+            <input type="checkbox" name="no" id="">No, I wouldn't
+        </p>
+        <input type="reset" value="Reset">
+        <input type="submit" value="Pay">
+    </form></div>
+</body>
+</html>

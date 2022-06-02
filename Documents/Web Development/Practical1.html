@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Practical 1</title>
+</head>
+<body>
+    <h2>Enter Your Details</h2>
+    <form>
+        <p>Name: <input type="text" name="name" id=""></p>
+        <p>Age: <input type="number" name="age" id=""></p>
+        <fieldset> 
+            <legend>Gender </legend>
+            <p>Male <input type="radio" name="gender" id="male" ></p>
+            <p>Female<input type="radio" name="gender" id="female" ></p>
+			<p>Others <input type="radio" name="gender" id="others"></p>
+        </fieldset> 
+		<p>
+            Address: <textarea name="address" id="" cols="50" rows="5"></textarea>
+        </p>
+        
+		<p>Course Type:
+            <select name="course type" id="course" >
+                <option value="">--Select--</option>
+                <option value="bsc">B.Sc.</option>
+                <option value="bcom">B.Com</option>
+                <option value="ba">B.A.</option>
+            </select>
+        </p>
+		<p>SEC Opted:
+			<input type="checkbox" name="sec" id="webdev">Web Development
+			<input type="checkbox" name="sec" id="programming">Advanced Programming in Java
+		</p>
+		<h2>Log Into Your Account</h2>
+		<p>Email:<input type="email" name="email" id="" ></p>
+		<p>Password: <input type="password" name="password" id=""></p>
+		<input type="submit" value="Submit">
+    </form>
+</body>
+</html>

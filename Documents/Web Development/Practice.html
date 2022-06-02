@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation</title>
+    <style>
+        ul{
+            list-style-type: none;
+            padding-top:10px;
+            background-color: green;
+            overflow: hidden;
+            position:absolute;
+        }
+        li{
+            float: left;
+        }
+        li a{
+            text-decoration: none;
+            padding: 15px;
+            padding-bottom: 15px;
+            background-color: green;
+            color: white;
+            text-align: center;
+        }
+        li a:hover {
+            color: yellow;
+        }
+        .list a{
+            display: block;
+            text-align: left;
+        }
+        .list{
+            display: none;
+        }
+        .dropdown:hover,.list{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a> </li>
+            <li class="dropdown"><a href="#" class="dropbtn">About</a> 
+                <div class="list">
+                    <a href="#">Engineering</a>
+                    <a href="#">Telecom</a>
+                    <a href="#">Energy</a>
+                    <a href="#">Finance</a>
+                    <a href="#">Consultancy</a>
+                </div>
+            </li>
+            <li><a href="#">Products</a> </li>
+            <li><a href="#">Services</a> </li>
+            <li><a href="#">Contact</a> </li>
+        </ul>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,77 @@
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>Practical Exam</title>
+  <style>
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: green;
+  }
+
+  li {
+    float: left;
+  }
+
+  li a, .drop-pro {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  li a:hover, .dropdown:hover .drop-pro {
+    color:yellow;
+  }
+
+  li.dropdown {
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color:green;
+    min-width: 160px;
+  }
+
+  .dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  </style>
+  </head>
+  <body>
+
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li class="dropdown">
+      <a href="#" class="drop-pro">Products</a>
+      <div class="dropdown-content">
+        <a href="#">Engineering</a>
+        <a href="#">Telecom</a>
+        <a href="#">Energy</a>
+        <a href="#">Finance</a>
+        <a href="#">Consultancy</a>
+      </div>
+    </li>
+    
+    <li><a href="#">Services</a> </li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <!--
+  <h3>Dropdown Menu inside a Navigation Bar</h3>
+  <p>Hover over the "Dropdown" link to see the dropdown menu.</p>
+  -->
+  </body>
+    </html>

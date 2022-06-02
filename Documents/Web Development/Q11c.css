@@ -1,0 +1,21 @@
+body
+{
+font-size:500 px;
+}
+
+.normal
+{
+color: darkblue;					
+}
+
+.important
+{
+color: red;
+background:yellow ;
+}
+
+.extra
+{
+background: grey;
+color: green;
+}
