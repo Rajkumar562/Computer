@@ -1,9 +1,0 @@
-public class halloween
-{
-public static void main()
-{
- StringBuffer s1=new StringBuffer();
- s1.reverse();
- System.out.println(s1);
-}
-}

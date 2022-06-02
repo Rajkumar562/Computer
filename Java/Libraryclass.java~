@@ -1,7 +1,0 @@
-public class Libraryclass
-{
-public static void main()
-{String s ="RAJKUMAR";
-System.out.println(s.Indexof(3));
-}
-}

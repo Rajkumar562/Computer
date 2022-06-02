@@ -1,9 +1,0 @@
-public class series
-{
-    public static void main(int n)
-    {
-        int a=0;
-        a=n%10;
-        System.out.println(a);
-    }
-}

@@ -1,9 +1,0 @@
- class demo
-{
-  public static void main()
-  {
-      int i=67;
-      String a = String.valueOf(i);
-      System.out.println(a);
-    }
-}
