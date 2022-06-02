@@ -1,0 +1,9 @@
+public class StringBuffer
+{
+public static void main()
+{
+ StringBuffer s1=new StringBuffer("super");
+ s1.reverse();
+ System.out.println(s1);
+}
+}

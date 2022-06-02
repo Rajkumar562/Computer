@@ -1,0 +1,92 @@
+import java.util.*;
+class Rearrange2{
+    Scanner kb=new Scanner(System.in);
+    int n;
+    int a[], b[],pos1,pos2,item;
+    void enter(){ 
+
+        System.out.println("Enter array length");
+        n=kb.nextInt();
+        a=new int [n];
+        b=new int[n+1];
+        System.out.println("Enter the "+a.length+" numbers");
+        for(int i=0;i<a.length;i++){
+            System.out.print((i+1)+"::");
+            a[i]=kb.nextInt();
+            System.out.println();
+        }
+    }
+
+    void remove(){
+        repeat:while(true){
+            System.out.println("Enter the position of element to be deleted");
+            pos2=kb.nextInt();
+            if(pos2>=a.length|pos1<0){
+                System.out.println("Wrong Input!!!");
+                System.out.println("Please enter the correct position");
+                continue repeat;
+            }
+            else
+                break;
+
+        }
+        for(int i=pos2;i<b.length-1;i++){
+            b[i]=b[i+1];
+
+        }
+
+    }
+
+    void insert(){
+        repeat:while(true){
+            System.out.println("Enter the position of element to be inserted");
+            pos1=kb.nextInt();
+            if(pos1>=a.length|pos1<0){
+                System.out.println("Wrong Input!!!");
+                System.out.println("Please enter the correct position");
+                continue repeat;
+            }
+            else
+                break;
+
+        }
+        for(int i=0;i<a.length;i++){
+            b[i]=a[i];
+        }
+
+        System.out.println("Enter a number to be inserted at index "+pos1);
+        int num=kb.nextInt();
+
+        for(int i=b.length-1;i>pos1;i--){
+            b[i]=b[i-1];
+        }
+        b[pos1]=num;
+    }
+
+    void disp1(){
+
+        System.out.println("-----------Array element is inserted-----------");
+        for(int i=0;i<b.length;i++){
+            System.out.print(b[i]+" ");
+        }
+        System.out.println();
+    }
+
+    void disp2(){
+        System.out.println("-------Array after element is deleted------------");
+        for(int i=0;i<b.length-1;i++){
+
+            System.out.println(b[i]+" ");
+        }
+
+    }
+
+    public static void main(){
+        Rearrange2 obj=new Rearrange2();
+        obj.enter();
+        obj.insert();
+        obj.disp1();
+        obj.remove();
+        obj.disp2();
+    }
+}

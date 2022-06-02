@@ -1,0 +1,10 @@
+import java.util.*;
+public class reverse
+{
+    public static void main(int s)
+    {
+        int a=0;
+        a=s%10;
+        System.out.println(a);
+    }
+}
