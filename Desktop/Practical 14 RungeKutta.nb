@@ -1,0 +1,3099 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[    103763,       3091]
+NotebookOptionsPosition[    102382,       3061]
+NotebookOutlinePosition[    102824,       3078]
+CellTagsIndexPosition[    102781,       3075]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+ "                 ",
+ StyleBox["                  Practical 14\n                  Second Order \
+Runge Kutta Method", "Title",
+  FontSize->36]
+}], "Title",
+ CellChangeTimes->{{3.8225257522683253`*^9, 3.822525789639988*^9}, {
+  3.8225296062358313`*^9, 3.822529610734773*^9}, {3.8394721393908405`*^9, 
+  3.8394721710725837`*^9}, {3.8455471941523037`*^9, 3.8455472191921144`*^9}, {
+  3.8599921676913424`*^9, 3.85999218717666*^9}, {3.859995644846815*^9, 
+  3.8599956617538705`*^9}, {3.859995714699249*^9, 
+  3.8599957151524625`*^9}},ExpressionUUID->"606a3e4e-2bdb-4046-b8f5-\
+25f0ec1a51f7"],
+
+Cell[" ", "Text",
+ Editable->False,
+ Selectable->False,
+ CellFrame->{{0, 0}, {0, 2}},
+ ShowCellBracket->False,
+ CellMargins->{{0, 0}, {1, 1}},
+ CellElementSpacings->{"CellMinHeight"->1},
+ CellFrameMargins->0,
+ CellFrameColor->RGBColor[0, 0, 1],
+ CellSize->{
+  Inherited, 4},ExpressionUUID->"d2811426-1b15-4d36-be88-0dfefc7cef37"],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", "1", ")"}], "   ", 
+     StyleBox[
+      RowBox[{"U", 
+       StyleBox["s", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "in", 
+       StyleBox["g", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox["Ru", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "ng", 
+       StyleBox["e", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]]}], 
+    StyleBox["-", "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], 
+    RowBox[{
+     StyleBox[
+      RowBox[{
+       StyleBox["K", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "ut", 
+       StyleBox["t", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox["a", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox[
+        StyleBox["M", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "et", 
+       StyleBox[
+        StyleBox["h", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "o", 
+       StyleBox[
+        StyleBox["d", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox["of", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox["se", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "co", 
+       StyleBox[
+        StyleBox["n", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox[
+         StyleBox["d", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox["or", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "de", 
+       StyleBox[
+        StyleBox["r", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]]}]}], 
+   StyleBox[
+    StyleBox[
+     StyleBox[",", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], "Subsubsection",
+    FontFamily->"Times New Roman",
+    FontSize->20], 
+   StyleBox[" ", "Subsubsection",
+    FontFamily->"Times New Roman",
+    FontSize->20], 
+   RowBox[{
+    RowBox[{
+     StyleBox[
+      RowBox[{
+       StyleBox["f", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "in", 
+       StyleBox["d", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox[
+        StyleBox["a", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "pp", 
+       StyleBox[
+        StyleBox["r", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "ox", 
+       StyleBox[
+        StyleBox["i", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "ma", 
+       StyleBox[
+        StyleBox["t", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox[
+         StyleBox["e", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox["so", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "lu", 
+       StyleBox[
+        StyleBox["t", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "io", 
+       StyleBox[
+        StyleBox["n", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{"fo", 
+       StyleBox[
+        StyleBox["r", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}], "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{"th", 
+       StyleBox[
+        StyleBox["e", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}], "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox["in", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "it", 
+       StyleBox[
+        StyleBox["i", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "al"}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox["va", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "lu", 
+       StyleBox[
+        StyleBox["e", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox["pr", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "ob", 
+       StyleBox[
+        StyleBox["l", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "em"}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox[
+        StyleBox["x", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox["'", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}], "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox[
+        StyleBox["(", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox["t", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox[
+         StyleBox[")", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}], "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20]}], 
+    StyleBox[
+     StyleBox[
+      StyleBox[" ", "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], 
+    StyleBox["=", "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], 
+    StyleBox[
+     StyleBox[
+      StyleBox[" ", "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], 
+    StyleBox[
+     RowBox[{
+      RowBox[{
+       StyleBox["1", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "+", 
+       RowBox[{
+        StyleBox[
+         StyleBox[
+          FractionBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["x", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "t"], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], 
+        StyleBox[
+         RowBox[{" ", 
+          StyleBox[
+           StyleBox[
+            StyleBox[" ", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20]}]], 
+        StyleBox[
+         StyleBox[
+          StyleBox["1", "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20]}]}], 
+      StyleBox[
+       StyleBox[
+        StyleBox["\[LessEqual]", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], 
+      StyleBox[
+       StyleBox["t", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], 
+      StyleBox[
+       StyleBox["\[LessEqual]", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], 
+      StyleBox[
+       StyleBox["6", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20]}], "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20]}], 
+   StyleBox[
+    StyleBox[
+     StyleBox[
+      StyleBox[",", "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], "Subsubsection",
+    FontFamily->"Times New Roman",
+    FontSize->20], 
+   StyleBox[" ", "Subsubsection",
+    FontFamily->"Times New Roman",
+    FontSize->20], 
+   RowBox[{
+    StyleBox[
+     RowBox[{"x", 
+      RowBox[{
+       StyleBox["(", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox["t", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox[
+         StyleBox[")", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]}], "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], 
+    StyleBox["=", "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], 
+    StyleBox[
+     StyleBox[
+      StyleBox[" ", "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], 
+    RowBox[{
+     RowBox[{
+      StyleBox[
+       RowBox[{
+        StyleBox[
+         StyleBox["1", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "."}]], 
+      StyleBox[" ", "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], 
+      StyleBox[
+       RowBox[{"Us", 
+        StyleBox[
+         StyleBox["e", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20]}], "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], 
+      StyleBox[" ", "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], 
+      StyleBox[
+       StyleBox[
+        StyleBox[
+         StyleBox["n", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20]}], 
+     StyleBox["=", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     RowBox[{
+      RowBox[{
+       StyleBox[
+        StyleBox[
+         StyleBox["5", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox["di", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "sc", 
+         StyleBox[
+          StyleBox[
+           StyleBox["r", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "et", 
+         StyleBox[
+          StyleBox[
+           StyleBox["e", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["p", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "oi", 
+         StyleBox[
+          StyleBox[
+           StyleBox["n", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "ts"}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox["a", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         StyleBox[
+          StyleBox[
+           StyleBox["t", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["e", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "qu", 
+         StyleBox[
+          StyleBox[
+           StyleBox["a", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox["l", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       RowBox[{
+        StyleBox[
+         RowBox[{
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox[
+              StyleBox["s", "Subsubsection",
+               FontFamily->"Times New Roman",
+               FontSize->20], "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "pa", 
+          StyleBox[
+           StyleBox[
+            StyleBox["c", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], 
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["e", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20]}]], 
+        StyleBox[
+         StyleBox[
+          StyleBox[
+           StyleBox[".", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], 
+        StyleBox[
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[" ", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], 
+        StyleBox[
+         RowBox[{
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox[
+              StyleBox[
+               StyleBox["C", "Subsubsection",
+                FontFamily->"Times New Roman",
+                FontSize->20], "Subsubsection",
+               FontFamily->"Times New Roman",
+               FontSize->20], "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "om", 
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["p", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "ar", 
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["e", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20]}]]}], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox[
+              StyleBox["t", "Subsubsection",
+               FontFamily->"Times New Roman",
+               FontSize->20], "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "he"}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["s", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "ol", 
+         StyleBox[
+          StyleBox[
+           StyleBox["u", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "ti", 
+         StyleBox[
+          StyleBox[
+           StyleBox["o", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox["n", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["w", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "it", 
+         StyleBox[
+          StyleBox[
+           StyleBox["h", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["t", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "he"}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["k", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "no", 
+         StyleBox[
+          StyleBox[
+           StyleBox["w", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox["n", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["a", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "na", 
+         StyleBox[
+          StyleBox[
+           StyleBox["l", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "yt", 
+         StyleBox[
+          StyleBox[
+           StyleBox["i", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox["c", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["s", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "ol", 
+         StyleBox[
+          StyleBox[
+           StyleBox["u", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "ti", 
+         StyleBox[
+          StyleBox[
+           StyleBox["o", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox["n", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox[
+         StyleBox[
+          StyleBox[
+           StyleBox["x", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox["(", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox["t", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[")", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}], 
+      StyleBox[
+       StyleBox[
+        StyleBox[
+         StyleBox[" ", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], 
+      StyleBox["=", "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], 
+      RowBox[{
+       StyleBox[
+        StyleBox[
+         StyleBox[
+          StyleBox["t", "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       RowBox[{
+        StyleBox[
+         RowBox[{
+          StyleBox[
+           StyleBox[
+            StyleBox["(", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], 
+          RowBox[{
+           StyleBox[
+            StyleBox[
+             StyleBox[
+              StyleBox[
+               StyleBox["1", "Subsubsection",
+                FontFamily->"Times New Roman",
+                FontSize->20], "Subsubsection",
+               FontFamily->"Times New Roman",
+               FontSize->20], "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "+", 
+           RowBox[{"ln", 
+            RowBox[{
+             StyleBox[
+              StyleBox[
+               StyleBox[
+                StyleBox[
+                 StyleBox[
+                  StyleBox["(", "Subsubsection",
+                   FontFamily->"Times New Roman",
+                   FontSize->20], "Subsubsection",
+                  FontFamily->"Times New Roman",
+                  FontSize->20], "Subsubsection",
+                 FontFamily->"Times New Roman",
+                 FontSize->20], "Subsubsection",
+                FontFamily->"Times New Roman",
+                FontSize->20], "Subsubsection",
+               FontFamily->"Times New Roman",
+               FontSize->20], "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], 
+             StyleBox[
+              StyleBox[
+               StyleBox[
+                StyleBox[
+                 StyleBox[
+                  StyleBox[
+                   StyleBox[
+                    StyleBox["t", "Subsubsection",
+                    FontFamily->"Times New Roman",
+                    FontSize->20], "Subsubsection",
+                    FontFamily->"Times New Roman",
+                    FontSize->20], "Subsubsection",
+                   FontFamily->"Times New Roman",
+                   FontSize->20], "Subsubsection",
+                  FontFamily->"Times New Roman",
+                  FontSize->20], "Subsubsection",
+                 FontFamily->"Times New Roman",
+                 FontSize->20], "Subsubsection",
+                FontFamily->"Times New Roman",
+                FontSize->20], "Subsubsection",
+               FontFamily->"Times New Roman",
+               FontSize->20], "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], 
+             StyleBox[
+              StyleBox[
+               StyleBox[
+                StyleBox[
+                 StyleBox[
+                  StyleBox[
+                   StyleBox[
+                    StyleBox[")", "Subsubsection",
+                    FontFamily->"Times New Roman",
+                    FontSize->20], "Subsubsection",
+                    FontFamily->"Times New Roman",
+                    FontSize->20], "Subsubsection",
+                   FontFamily->"Times New Roman",
+                   FontSize->20], "Subsubsection",
+                  FontFamily->"Times New Roman",
+                  FontSize->20], "Subsubsection",
+                 FontFamily->"Times New Roman",
+                 FontSize->20], "Subsubsection",
+                FontFamily->"Times New Roman",
+                FontSize->20], "Subsubsection",
+               FontFamily->"Times New Roman",
+               FontSize->20], "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20]}]}]}], 
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox[
+              StyleBox[
+               StyleBox[
+                StyleBox[")", "Subsubsection",
+                 FontFamily->"Times New Roman",
+                 FontSize->20], "Subsubsection",
+                FontFamily->"Times New Roman",
+                FontSize->20], "Subsubsection",
+               FontFamily->"Times New Roman",
+               FontSize->20], "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20]}], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], 
+        StyleBox[
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[".", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], " "}]}]}]}]}]}], "Subsubsection",
+  FontFamily->"Times New Roman",
+  FontSize->20]], "Input",
+ CellChangeTimes->{{3.8455472515690713`*^9, 
+  3.845547420090325*^9}},ExpressionUUID->"22bb59d6-b8f5-4f8b-b26e-\
+422690e45fad"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"RungeKutta2ndOrder", "[", 
+    RowBox[{
+    "a0_", ",", "b0_", ",", "n0_", ",", "f_", ",", "alpha_", ",", 
+     "actualSolution_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"a", "=", "a0"}], ",", 
+       RowBox[{"b", "=", "b0"}], ",", 
+       RowBox[{"n", "=", "n0"}], ",", "h", ",", "ti", ",", "k1", ",", "k2", 
+       ",", "k3", ",", "k4"}], "}"}], ",", "\[IndentingNewLine]", 
+     "                        ", 
+     RowBox[{
+      RowBox[{"h", "=", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"b", "-", "a"}], ")"}], "/", "n"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ti", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"a", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"j", "-", "1"}], ")"}], "h"}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"j", ",", "1", ",", 
+           RowBox[{"n", "+", "1"}]}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"wi", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"{", 
+          RowBox[{"n", "+", "1"}], "}"}]}], "]"}]}], ";", 
+      RowBox[{
+       RowBox[{"wi", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "=", "alpha"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"actualSol", "=", " ", 
+       RowBox[{"actualSolution", "[", 
+        RowBox[{"ti", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"difference", "=", 
+       RowBox[{"Abs", "[", 
+        RowBox[{"actualSol", "-", 
+         RowBox[{"wi", "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"OutputDetails", "=", 
+       RowBox[{"{", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", 
+          RowBox[{"ti", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], ",", "alpha", ",", "actualSol", 
+          ",", "difference"}], "}"}], "}"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "1"}], ",", 
+        RowBox[{"i", "\[LessSlantEqual]", "n"}], ",", 
+        RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"k1", "=", 
+          RowBox[{"h", " ", 
+           RowBox[{"f", "[", 
+            RowBox[{
+             RowBox[{"ti", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], ",", 
+             RowBox[{"wi", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"k2", "=", 
+          RowBox[{"h", " ", 
+           RowBox[{"f", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"ti", "[", 
+               RowBox[{"[", "i", "]"}], "]"}], "+", 
+              RowBox[{"h", "/", "2"}]}], ",", 
+             RowBox[{
+              RowBox[{"wi", "[", 
+               RowBox[{"[", "i", "]"}], "]"}], "+", 
+              RowBox[{"k1", "/", "2"}]}]}], "]"}]}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"wi", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", "+", "1"}], "]"}], "]"}], "=", 
+          RowBox[{
+           RowBox[{"wi", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "+", "k2"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"actualSol", " ", "=", 
+          RowBox[{"actualSolution", "[", 
+           RowBox[{"ti", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", "+", "1"}], "]"}], "]"}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"difference", "=", 
+          RowBox[{"Abs", "[", 
+           RowBox[{"actualSol", "-", 
+            RowBox[{"wi", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", "+", "1"}], "]"}], "]"}]}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"OutputDetails", "=", 
+          RowBox[{"Append", "[", 
+           RowBox[{"OutputDetails", ",", "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", 
+              RowBox[{"N", "[", 
+               RowBox[{"ti", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", "+", "1"}], "]"}], "]"}], "]"}], ",", 
+              RowBox[{"N", "[", 
+               RowBox[{"wi", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", "+", "1"}], "]"}], "]"}], "]"}], ",", 
+              RowBox[{"N", "[", "actualSol", "]"}], ",", 
+              RowBox[{"N", "[", "difference", "]"}]}], "}"}]}], "]"}]}], 
+         ";"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"NumberForm", "[", 
+        RowBox[{
+         RowBox[{"TableForm", "[", 
+          RowBox[{"OutputDetails", ",", " ", 
+           RowBox[{"TableHeadings", "\[RightArrow]", "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{"None", ",", 
+              RowBox[{"{", 
+               RowBox[{
+               "\"\<i\>\"", ",", "\"\<\!\(\*SubscriptBox[\(t\), \(i\)]\)\>\"",
+                 ",", "\"\<\!\(\*SubscriptBox[\(w\), \(i\)]\)\>\"", ",", " ", 
+                "\"\<actSol(\!\(\*SubscriptBox[\(t\), \(i\)]\))\>\"", ",", 
+                "\"\<Abs(\!\(\*SubscriptBox[\(w\), \
+\(i\)]\)-actSol(\!\(\*SubscriptBox[\(t\), \(i\)]\)))\>\""}], "}"}]}], 
+             "}"}]}]}], "]"}], ",", "6"}], "]"}], "]"}], ";"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"f", "[", 
+   RowBox[{"t_", ",", "x_"}], "]"}], ":=", 
+  RowBox[{"1", "+", 
+   FractionBox["x", "t"]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"actualSolution", "[", "t_", "]"}], ":=", 
+   RowBox[{"t", 
+    RowBox[{"(", 
+     RowBox[{"1", "+", 
+      RowBox[{"Log", "[", "t", "]"}]}], ")"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"RungeKutta2ndOrder", "[", 
+  RowBox[{
+  "1", ",", "6", ",", "5", ",", "f", ",", "1", ",", "actualSolution"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"                                       "}]}], "Input",
+ CellChangeTimes->{{3.845547427195924*^9, 3.8455481163777847`*^9}, {
+  3.8455481557490788`*^9, 3.8455481581683207`*^9}, {3.845548243604679*^9, 
+  3.845548348088499*^9}},ExpressionUUID->"ed9a7f86-8195-450c-9f3b-\
+f2807926c233"],
+
+Cell[BoxData[
+ TagBox[
+  TagBox[GridBox[{
+     {
+      InterpretationBox["\<\"0\"\>",
+       0,
+       Editable->False], 
+      InterpretationBox["\<\"1\"\>",
+       1,
+       Editable->False], 
+      InterpretationBox["\<\"1\"\>",
+       1,
+       Editable->False], 
+      InterpretationBox["\<\"1\"\>",
+       1,
+       Editable->False], 
+      InterpretationBox["\<\"0\"\>",
+       0,
+       Editable->False]},
+     {
+      InterpretationBox["\<\"1\"\>",
+       1,
+       Editable->False], 
+      InterpretationBox["\<\"2.\"\>",
+       2.,
+       AutoDelete->True], 
+      InterpretationBox["\<\"3.33333\"\>",
+       3.3333333333333335`,
+       AutoDelete->True], 
+      InterpretationBox["\<\"3.38629\"\>",
+       3.386294361119891,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.052961\"\>",
+       0.05296102778655731,
+       AutoDelete->True]},
+     {
+      InterpretationBox["\<\"2\"\>",
+       2,
+       Editable->False], 
+      InterpretationBox["\<\"3.\"\>",
+       3.,
+       AutoDelete->True], 
+      InterpretationBox["\<\"6.2\"\>",
+       6.2,
+       AutoDelete->True], 
+      InterpretationBox["\<\"6.29584\"\>",
+       6.29583686600433,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.0958369\"\>",
+       0.09583686600432983,
+       AutoDelete->True]},
+     {
+      InterpretationBox["\<\"3\"\>",
+       3,
+       Editable->False], 
+      InterpretationBox["\<\"4.\"\>",
+       4.,
+       AutoDelete->True], 
+      InterpretationBox["\<\"9.40952\"\>",
+       9.40952380952381,
+       AutoDelete->True], 
+      InterpretationBox["\<\"9.54518\"\>",
+       9.545177444479563,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.135654\"\>",
+       0.13565363495575333`,
+       AutoDelete->True]},
+     {
+      InterpretationBox["\<\"4\"\>",
+       4,
+       Editable->False], 
+      InterpretationBox["\<\"5.\"\>",
+       5.,
+       AutoDelete->True], 
+      InterpretationBox["\<\"12.873\"\>",
+       12.873015873015873`,
+       AutoDelete->True], 
+      InterpretationBox["\<\"13.0472\"\>",
+       13.047189562170502`,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.174174\"\>",
+       0.17417368915462816`,
+       AutoDelete->True]},
+     {
+      InterpretationBox["\<\"5\"\>",
+       5,
+       Editable->False], 
+      InterpretationBox["\<\"6.\"\>",
+       6.,
+       AutoDelete->True], 
+      InterpretationBox["\<\"16.5385\"\>",
+       16.53852813852814,
+       AutoDelete->True], 
+      InterpretationBox["\<\"16.7506\"\>",
+       16.75055681536833,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.212029\"\>",
+       0.2120286768401911,
+       AutoDelete->True]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   Function[BoxForm`e$, 
+    TableForm[BoxForm`e$, 
+     RightArrow[
+     TableHeadings, {
+      None, {"i", "\!\(\*SubscriptBox[\(t\), \(i\)]\)", 
+        "\!\(\*SubscriptBox[\(w\), \(i\)]\)", 
+        "actSol(\!\(\*SubscriptBox[\(t\), \(i\)]\))", 
+        "Abs(\!\(\*SubscriptBox[\(w\), \(i\)]\)-actSol(\!\(\*SubscriptBox[\(t\
+\), \(i\)]\)))"}}]]]],
+  NumberForm[#, 6]& ]], "Print",
+ CellChangeTimes->{
+  3.845548348867084*^9},ExpressionUUID->"5ef8751e-fdf7-4944-9f5e-\
+04ece018ff95"]
+}, Open  ]],
+
+Cell[" ", "Text",
+ Editable->False,
+ Selectable->False,
+ CellFrame->{{0, 0}, {0, 0.5}},
+ ShowCellBracket->False,
+ CellMargins->{{0, 0}, {1, 1}},
+ CellElementSpacings->{"CellMinHeight"->1},
+ CellFrameMargins->0,
+ CellFrameColor->RGBColor[0, 0, 1],
+ CellSize->{
+  Inherited, 3},ExpressionUUID->"d2d541aa-9860-478e-99a0-f2ecb1fdcf50"],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      StyleBox[
+       StyleBox[
+        StyleBox["2", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], ")"}], "   ", 
+     StyleBox[
+      RowBox[{"U", 
+       StyleBox["s", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "in", 
+       StyleBox["g", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox["Ru", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "ng", 
+       StyleBox["e", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]]}], 
+    StyleBox["-", "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], 
+    RowBox[{
+     StyleBox[
+      RowBox[{
+       StyleBox["K", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "ut", 
+       StyleBox["t", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox["a", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox[
+        StyleBox["M", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "et", 
+       StyleBox[
+        StyleBox["h", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "o", 
+       StyleBox[
+        StyleBox["d", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox["of", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox["se", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "co", 
+       StyleBox[
+        StyleBox["n", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox[
+         StyleBox["d", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox["or", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "de", 
+       StyleBox[
+        StyleBox["r", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]]}]}], 
+   StyleBox[
+    StyleBox[
+     StyleBox[",", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], "Subsubsection",
+    FontFamily->"Times New Roman",
+    FontSize->20], 
+   StyleBox[" ", "Subsubsection",
+    FontFamily->"Times New Roman",
+    FontSize->20], 
+   RowBox[{
+    RowBox[{
+     StyleBox[
+      RowBox[{
+       StyleBox["f", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "in", 
+       StyleBox["d", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox[
+        StyleBox["a", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "pp", 
+       StyleBox[
+        StyleBox["r", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "ox", 
+       StyleBox[
+        StyleBox["i", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "ma", 
+       StyleBox[
+        StyleBox["t", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox[
+         StyleBox["e", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox["so", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "lu", 
+       StyleBox[
+        StyleBox["t", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "io", 
+       StyleBox[
+        StyleBox["n", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{"fo", 
+       StyleBox[
+        StyleBox["r", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}], "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{"th", 
+       StyleBox[
+        StyleBox["e", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}], "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox["in", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "it", 
+       StyleBox[
+        StyleBox["i", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "al"}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox["va", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "lu", 
+       StyleBox[
+        StyleBox["e", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox["pr", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "ob", 
+       StyleBox[
+        StyleBox["l", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "em"}]], 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox[
+        StyleBox["x", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox["'", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}], "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     StyleBox[
+      RowBox[{
+       StyleBox[
+        StyleBox["(", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox["t", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox[
+         StyleBox[")", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}], "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20]}], 
+    StyleBox[
+     StyleBox[
+      StyleBox[" ", "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], 
+    StyleBox["=", "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], 
+    StyleBox[
+     RowBox[{
+      RowBox[{
+       StyleBox["t", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox[
+         StyleBox["^", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox["2", "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}], "-", 
+      StyleBox[
+       StyleBox["x", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20]}], "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20]}], 
+   StyleBox[
+    StyleBox[
+     StyleBox[
+      StyleBox[",", "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], "Subsubsection",
+    FontFamily->"Times New Roman",
+    FontSize->20], " ", 
+   RowBox[{"0", 
+    StyleBox[
+     StyleBox[
+      StyleBox[
+       StyleBox["\[LessEqual]", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], 
+    StyleBox[
+     StyleBox[
+      StyleBox["t", "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], 
+    StyleBox[
+     StyleBox[
+      StyleBox["\[LessEqual]", "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], 
+    StyleBox[
+     RowBox[{
+      StyleBox["0", "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], ".8"}]]}], 
+   StyleBox[",", "Subsubsection",
+    FontFamily->"Times New Roman",
+    FontSize->20], 
+   StyleBox[
+    RowBox[{" ", 
+     StyleBox[" ", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20]}]], 
+   RowBox[{
+    StyleBox[
+     RowBox[{"x", 
+      RowBox[{
+       StyleBox["(", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox[
+         StyleBox["0", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox[
+         StyleBox[")", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}]}], "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], 
+    StyleBox["=", "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], 
+    StyleBox[
+     StyleBox[
+      StyleBox[" ", "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], "Subsubsection",
+     FontFamily->"Times New Roman",
+     FontSize->20], 
+    RowBox[{
+     RowBox[{
+      StyleBox[
+       RowBox[{
+        StyleBox[
+         StyleBox["1", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "."}]], 
+      StyleBox[" ", "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], 
+      StyleBox[
+       RowBox[{"Us", 
+        StyleBox[
+         StyleBox["e", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20]}], "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], 
+      StyleBox[" ", "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], 
+      StyleBox[
+       StyleBox[
+        StyleBox[
+         StyleBox["n", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20]}], 
+     StyleBox["=", "Subsubsection",
+      FontFamily->"Times New Roman",
+      FontSize->20], 
+     RowBox[{
+      RowBox[{
+       StyleBox[
+        StyleBox[
+         StyleBox["8", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox["di", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "sc", 
+         StyleBox[
+          StyleBox[
+           StyleBox["r", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "et", 
+         StyleBox[
+          StyleBox[
+           StyleBox["e", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["p", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "oi", 
+         StyleBox[
+          StyleBox[
+           StyleBox["n", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "ts"}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox["a", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         StyleBox[
+          StyleBox[
+           StyleBox["t", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["e", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "qu", 
+         StyleBox[
+          StyleBox[
+           StyleBox["a", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox["l", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       RowBox[{
+        StyleBox[
+         RowBox[{
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox[
+              StyleBox["s", "Subsubsection",
+               FontFamily->"Times New Roman",
+               FontSize->20], "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "pa", 
+          StyleBox[
+           StyleBox[
+            StyleBox["c", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], 
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["e", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20]}]], 
+        StyleBox[
+         StyleBox[
+          StyleBox[
+           StyleBox[".", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], 
+        StyleBox[
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[" ", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], 
+        StyleBox[
+         RowBox[{
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox[
+              StyleBox[
+               StyleBox["C", "Subsubsection",
+                FontFamily->"Times New Roman",
+                FontSize->20], "Subsubsection",
+               FontFamily->"Times New Roman",
+               FontSize->20], "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "om", 
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["p", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "ar", 
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["e", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20]}]]}], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox[
+              StyleBox["t", "Subsubsection",
+               FontFamily->"Times New Roman",
+               FontSize->20], "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "he"}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["s", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "ol", 
+         StyleBox[
+          StyleBox[
+           StyleBox["u", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "ti", 
+         StyleBox[
+          StyleBox[
+           StyleBox["o", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox["n", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["w", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "it", 
+         StyleBox[
+          StyleBox[
+           StyleBox["h", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["t", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "he"}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["k", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "no", 
+         StyleBox[
+          StyleBox[
+           StyleBox["w", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox["n", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["a", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "na", 
+         StyleBox[
+          StyleBox[
+           StyleBox["l", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "yt", 
+         StyleBox[
+          StyleBox[
+           StyleBox["i", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox["c", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["s", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "ol", 
+         StyleBox[
+          StyleBox[
+           StyleBox["u", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "ti", 
+         StyleBox[
+          StyleBox[
+           StyleBox["o", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox["n", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}]], 
+       StyleBox[" ", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        StyleBox[
+         StyleBox[
+          StyleBox[
+           StyleBox["x", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox["(", "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox["t", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[")", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20]}], 
+      StyleBox[
+       StyleBox[
+        StyleBox[
+         StyleBox[" ", "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], 
+      StyleBox["=", "Subsubsection",
+       FontFamily->"Times New Roman",
+       FontSize->20], 
+      RowBox[{"2", 
+       StyleBox["-", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox["e", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["^", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         RowBox[{
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox[
+              StyleBox["{", "Subsubsection",
+               FontFamily->"Times New Roman",
+               FontSize->20], "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], 
+          RowBox[{
+           StyleBox[
+            StyleBox[
+             StyleBox[
+              StyleBox[
+               StyleBox[
+                StyleBox["-", "Subsubsection",
+                 FontFamily->"Times New Roman",
+                 FontSize->20], "Subsubsection",
+                FontFamily->"Times New Roman",
+                FontSize->20], "Subsubsection",
+               FontFamily->"Times New Roman",
+               FontSize->20], "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], 
+           StyleBox[
+            StyleBox[
+             StyleBox[
+              StyleBox[
+               StyleBox[
+                StyleBox[
+                 StyleBox["t", "Subsubsection",
+                  FontFamily->"Times New Roman",
+                  FontSize->20], "Subsubsection",
+                 FontFamily->"Times New Roman",
+                 FontSize->20], "Subsubsection",
+                FontFamily->"Times New Roman",
+                FontSize->20], "Subsubsection",
+               FontFamily->"Times New Roman",
+               FontSize->20], "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20]}], 
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox[
+              StyleBox[
+               StyleBox[
+                StyleBox[
+                 StyleBox["}", "Subsubsection",
+                  FontFamily->"Times New Roman",
+                  FontSize->20], "Subsubsection",
+                 FontFamily->"Times New Roman",
+                 FontSize->20], "Subsubsection",
+                FontFamily->"Times New Roman",
+                FontSize->20], "Subsubsection",
+               FontFamily->"Times New Roman",
+               FontSize->20], "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20]}]}], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox["-", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox[
+        RowBox[{
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox["2", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], 
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["t", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20]}], "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       StyleBox["+", "Subsubsection",
+        FontFamily->"Times New Roman",
+        FontSize->20], 
+       RowBox[{
+        StyleBox[
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox["t", "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], 
+        StyleBox[
+         StyleBox[
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox["^", "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "Subsubsection",
+          FontFamily->"Times New Roman",
+          FontSize->20], "Subsubsection",
+         FontFamily->"Times New Roman",
+         FontSize->20], 
+        StyleBox[
+         RowBox[{
+          StyleBox[
+           StyleBox[
+            StyleBox[
+             StyleBox[
+              StyleBox[
+               StyleBox["2", "Subsubsection",
+                FontFamily->"Times New Roman",
+                FontSize->20], "Subsubsection",
+               FontFamily->"Times New Roman",
+               FontSize->20], "Subsubsection",
+              FontFamily->"Times New Roman",
+              FontSize->20], "Subsubsection",
+             FontFamily->"Times New Roman",
+             FontSize->20], "Subsubsection",
+            FontFamily->"Times New Roman",
+            FontSize->20], "Subsubsection",
+           FontFamily->"Times New Roman",
+           FontSize->20], "."}]], " "}]}]}]}]}]}], "Subsubsection",
+  FontFamily->"Times New Roman",
+  FontSize->20]], "Input",
+ CellChangeTimes->{{3.8455483823228364`*^9, 3.8455484014092827`*^9}, {
+  3.845548440916483*^9, 
+  3.8455484947004237`*^9}},ExpressionUUID->"dd490f90-d226-477e-ac51-\
+b4f0ffdeddf5"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", 
+    RowBox[{"t_", ",", "x_"}], "]"}], ":=", 
+   RowBox[{
+    SuperscriptBox["t", "2"], "-", "x"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"actualSolution", "[", "t_", "]"}], ":=", " ", 
+   RowBox[{"2", "-", 
+    RowBox[{"Exp", "[", 
+     RowBox[{"-", "t"}], "]"}], "-", 
+    RowBox[{"2", " ", "t"}], "+", 
+    SuperscriptBox["t", "2"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"RungeKutta2ndOrder", "[", 
+  RowBox[{
+  "0", ",", "0.8", ",", "8", ",", "f", ",", "1", ",", "actualSolution"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"                                       "}]}], "Input",
+ CellChangeTimes->{{3.845548507055952*^9, 
+  3.845548548964362*^9}},ExpressionUUID->"f644d59d-cc42-40ec-9f45-\
+68cb16b61be4"],
+
+Cell[BoxData[
+ TagBox[
+  TagBox[GridBox[{
+     {
+      InterpretationBox["\<\"0\"\>",
+       0,
+       Editable->False], 
+      InterpretationBox["\<\"0\"\>",
+       0,
+       Editable->False], 
+      InterpretationBox["\<\"1\"\>",
+       1,
+       Editable->False], 
+      InterpretationBox["\<\"1\"\>",
+       1,
+       Editable->False], 
+      InterpretationBox["\<\"0\"\>",
+       0,
+       Editable->False]},
+     {
+      InterpretationBox["\<\"1\"\>",
+       1,
+       Editable->False], 
+      InterpretationBox["\<\"0.1\"\>",
+       0.1,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.90525\"\>",
+       0.90525,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.905163\"\>",
+       0.9051625819640405,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.000087418\"\>",
+       0.0000874180359594634,
+       AutoDelete->True]},
+     {
+      InterpretationBox["\<\"2\"\>",
+       2,
+       Editable->False], 
+      InterpretationBox["\<\"0.2\"\>",
+       0.2,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.821451\"\>",
+       0.82145125,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.821269\"\>",
+       0.8212692469220183,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.000182003\"\>",
+       0.00018200307798166282`,
+       AutoDelete->True]},
+     {
+      InterpretationBox["\<\"3\"\>",
+       3,
+       Editable->False], 
+      InterpretationBox["\<\"0.3\"\>",
+       0.30000000000000004`,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.749463\"\>",
+       0.74946338125,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.749182\"\>",
+       0.7491817793182822,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.000281602\"\>",
+       0.0002816019317177787,
+       AutoDelete->True]},
+     {
+      InterpretationBox["\<\"4\"\>",
+       4,
+       Editable->False], 
+      InterpretationBox["\<\"0.4\"\>",
+       0.4,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.690064\"\>",
+       0.69006436003125,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.68968\"\>",
+       0.6896799539643607,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.000384406\"\>",
+       0.0003844060668893867,
+       AutoDelete->True]},
+     {
+      InterpretationBox["\<\"5\"\>",
+       5,
+       Editable->False], 
+      InterpretationBox["\<\"0.5\"\>",
+       0.5,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.643958\"\>",
+       0.6439582458282813,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.643469\"\>",
+       0.6434693402873666,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.000488906\"\>",
+       0.0004889055409147414,
+       AutoDelete->True]},
+     {
+      InterpretationBox["\<\"6\"\>",
+       6,
+       Editable->False], 
+      InterpretationBox["\<\"0.6\"\>",
+       0.6000000000000001,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.611782\"\>",
+       0.6117822124745946,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.611188\"\>",
+       0.6111883639059734,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.000593849\"\>",
+       0.0005938485686212136,
+       AutoDelete->True]},
+     {
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False], 
+      InterpretationBox["\<\"0.7\"\>",
+       0.7000000000000001,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.594113\"\>",
+       0.5941129022895082,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.593415\"\>",
+       0.5934146962085906,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.000698206\"\>",
+       0.0006982060809176405,
+       AutoDelete->True]},
+     {
+      InterpretationBox["\<\"8\"\>",
+       8,
+       Editable->False], 
+      InterpretationBox["\<\"0.8\"\>",
+       0.8,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.591472\"\>",
+       0.5914721765720049,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.590671\"\>",
+       0.5906710358827785,
+       AutoDelete->True], 
+      InterpretationBox["\<\"0.000801141\"\>",
+       0.0008011406892264317,
+       AutoDelete->True]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   Function[BoxForm`e$, 
+    TableForm[BoxForm`e$, 
+     RightArrow[
+     TableHeadings, {
+      None, {"i", "\!\(\*SubscriptBox[\(t\), \(i\)]\)", 
+        "\!\(\*SubscriptBox[\(w\), \(i\)]\)", 
+        "actSol(\!\(\*SubscriptBox[\(t\), \(i\)]\))", 
+        "Abs(\!\(\*SubscriptBox[\(w\), \(i\)]\)-actSol(\!\(\*SubscriptBox[\(t\
+\), \(i\)]\)))"}}]]]],
+  NumberForm[#, 6]& ]], "Print",
+ CellChangeTimes->{
+  3.8455485511391993`*^9},ExpressionUUID->"d4b3b3fd-a328-4a4d-b779-\
+f350b50c160c"]
+}, Open  ]],
+
+Cell[" ", "Text",
+ Editable->False,
+ Selectable->False,
+ CellFrame->{{0, 0}, {0, 2}},
+ ShowCellBracket->False,
+ CellMargins->{{0, 0}, {1, 1}},
+ CellElementSpacings->{"CellMinHeight"->1},
+ CellFrameMargins->0,
+ CellFrameColor->RGBColor[0, 0, 1],
+ CellSize->{
+  Inherited, 4},ExpressionUUID->"bc4bcfea-3014-4fd6-bc95-2e4d6f0eb751"]
+}, Open  ]]
+},
+WindowSize->{1366, 725},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification:>FEPrivate`If[
+  FEPrivate`Equal[FEPrivate`$VersionNumber, 6.], 1.25, 1.25 Inherited],
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 603, 12, 182, "Title",ExpressionUUID->"606a3e4e-2bdb-4046-b8f5-25f0ec1a51f7"],
+Cell[1173, 36, 329, 10, 10, "Text",ExpressionUUID->"d2811426-1b15-4d36-be88-0dfefc7cef37"],
+Cell[1505, 48, 41460, 1218, 184, "Input",ExpressionUUID->"22bb59d6-b8f5-4f8b-b26e-422690e45fad"],
+Cell[CellGroupData[{
+Cell[42990, 1270, 6181, 162, 531, "Input",ExpressionUUID->"ed9a7f86-8195-450c-9f3b-f2807926c233"],
+Cell[49174, 1434, 3525, 122, 120, "Print",ExpressionUUID->"5ef8751e-fdf7-4944-9f5e-04ece018ff95"]
+}, Open  ]],
+Cell[52714, 1559, 331, 10, 7, "Text",ExpressionUUID->"d2d541aa-9860-478e-99a0-f2ecb1fdcf50"],
+Cell[53048, 1571, 43155, 1276, 157, "Input",ExpressionUUID->"dd490f90-d226-477e-ac51-b4f0ffdeddf5"],
+Cell[CellGroupData[{
+Cell[96228, 2851, 801, 22, 108, "Input",ExpressionUUID->"f644d59d-cc42-40ec-9f45-68cb16b61be4"],
+Cell[97032, 2875, 4990, 170, 177, "Print",ExpressionUUID->"d4b3b3fd-a328-4a4d-b779-f350b50c160c"]
+}, Open  ]],
+Cell[102037, 3048, 329, 10, 10, "Text",ExpressionUUID->"bc4bcfea-3014-4fd6-bc95-2e4d6f0eb751"]
+}, Open  ]]
+}
+]
+*)
+

@@ -1,0 +1,596 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     18913,        588]
+NotebookOptionsPosition[     17406,        554]
+NotebookOutlinePosition[     17747,        569]
+CellTagsIndexPosition[     17704,        566]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+ StyleBox["                      ", "Title"],
+ StyleBox["   ", "Title",
+  FontSize->36],
+ StyleBox[" Practical 13\n                             Euler's Method", 
+  "Title",
+  FontSize->36,
+  FontWeight->"Bold"]
+}], "Title",
+ CellChangeTimes->{{3.763726071701316*^9, 3.7637260863073206`*^9}, {
+  3.8273056154768105`*^9, 3.827305632515992*^9}, {3.827305757183448*^9, 
+  3.827305764515533*^9}, {3.8273057963963323`*^9, 3.827305807531769*^9}, {
+  3.827306239209906*^9, 3.8273062433274336`*^9}, {3.8425725438420353`*^9, 
+  3.8425725457928033`*^9}, {3.8599918610195103`*^9, 3.859991866144771*^9}, {
+  3.859991896958836*^9, 3.8599919067093306`*^9}, {3.8599919768222704`*^9, 
+  3.8599919901041903`*^9}, {3.859992028559275*^9, 3.8599920397160854`*^9}, {
+  3.8599920938594046`*^9, 3.8599920975471115`*^9}},
+ FontFamily->"Arial",
+ FontSize->48,ExpressionUUID->"2d063ccc-2de1-4f66-8ad2-7efe8754879d"],
+
+Cell[" ", "Text",
+ Editable->False,
+ Selectable->False,
+ CellFrame->{{0, 0}, {0, 2}},
+ ShowCellBracket->False,
+ CellMargins->{{0, 0}, {1, 1}},
+ CellElementSpacings->{"CellMinHeight"->1},
+ CellFrameMargins->0,
+ CellFrameColor->RGBColor[0, 0, 1],
+ CellSize->{
+  Inherited, 4},ExpressionUUID->"55fe1d48-1b01-49dd-963c-33e4c1d233a4"],
+
+Cell[TextData[StyleBox["Euler's Method with subinterval length h as input-:",
+ FontFamily->"Times New Roman",
+ FontSize->22,
+ FontWeight->"Bold"]], "Text",
+ CellChangeTimes->{{3.617017163059804*^9, 
+  3.6170172143679285`*^9}},ExpressionUUID->"d9911d44-ea8f-4885-96c0-\
+e46978ff53ed"],
+
+Cell[TextData[{
+ StyleBox["Q. Using Euler's Method, find approximate solution to the initial \
+value problem ",
+  FontFamily->"Times New Roman",
+  FontSize->20],
+ StyleBox["x'(t) = ",
+  FontFamily->"Times New Roman",
+  FontSize->20,
+  FontWeight->"Bold"],
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"-", "2"}], 
+    SuperscriptBox["tx", "2"]}], TraditionalForm]],
+  FontFamily->"Times New Roman",
+  FontSize->20,
+  FontWeight->"Bold",ExpressionUUID->"d41842c5-ed97-4e9b-ba94-32ce9b2e8580"],
+ StyleBox[", 0 \[LessEqual] t \[LessEqual] 1, x(0) = 1 with",
+  FontFamily->"Times New Roman",
+  FontSize->20],
+ StyleBox[" \n\t           (a) ",
+  FontFamily->"Times New Roman",
+  FontSize->20,
+  FontWeight->"Bold"],
+ StyleBox["h = 0.2",
+  FontFamily->"Times New Roman",
+  FontSize->20],
+ StyleBox[" \n\t           (b) ",
+  FontFamily->"Times New Roman",
+  FontSize->20,
+  FontWeight->"Bold"],
+ StyleBox["h = 0.1. ",
+  FontFamily->"Times New Roman",
+  FontSize->20],
+ StyleBox["\n",
+  FontSize->18],
+ StyleBox["Solution-:",
+  FontSize->18,
+  FontWeight->"Bold"]
+}], "Text",
+ CellChangeTimes->{{3.6163547722540092`*^9, 3.616354892254221*^9}, {
+  3.616354930959296*^9, 3.616354963434372*^9}, {3.6167225953359885`*^9, 
+  3.6167227650303*^9}, {3.616724770197462*^9, 3.6167247796765013`*^9}, {
+  3.6167485032901325`*^9, 3.616748506690939*^9}, {3.616748566423444*^9, 
+  3.6167486885560584`*^9}, {3.616779022864775*^9, 3.616779026047181*^9}, {
+  3.616779064033248*^9, 3.6167791658234262`*^9}, {3.616779301574865*^9, 
+  3.616779306738474*^9}, {3.6168022536169987`*^9, 3.6168024216373262`*^9}, {
+  3.6168050677361865`*^9, 3.616805126789297*^9}, {3.6168062790411835`*^9, 
+  3.6168062850981936`*^9}, {3.6170172422949753`*^9, 3.617017306940104*^9}, {
+  3.61701734979218*^9, 3.6170175758146133`*^9}, {3.6170177464879637`*^9, 
+  3.6170177536189775`*^9}, {3.763725863793649*^9, 3.7637258644498205`*^9}, {
+  3.827305851313473*^9, 
+  3.827305910627546*^9}},ExpressionUUID->"891f9fda-4c1a-4192-943c-\
+381fa8be0fdb"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"EulerMethod", "[", 
+     RowBox[{"a0_", ",", "b0_", ",", "h0_", ",", "f_", ",", "alpha_"}], "]"}],
+     ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"a", "=", "a0"}], ",", 
+        RowBox[{"b", "=", "b0"}], ",", 
+        RowBox[{"h", "=", "h0"}], ",", "n", ",", "ti"}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"n", "=", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"b", "-", "a"}], ")"}], "/", "h"}]}], ";", "         ", 
+       "\[IndentingNewLine]", 
+       RowBox[{"ti", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"a", "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"j", "-", "1"}], ")"}], " ", "h"}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"j", ",", "1", ",", 
+            RowBox[{"n", "+", "1"}]}], "}"}]}], "]"}]}], ";", "    ", 
+       "\[IndentingNewLine]", 
+       RowBox[{"wi", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{"0", ",", 
+          RowBox[{"{", 
+           RowBox[{"n", "+", "1"}], "}"}]}], "]"}]}], ";", "       ", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"wi", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "=", "alpha"}], ";", "       ", 
+       "\[IndentingNewLine]", 
+       RowBox[{"OutputDetails", "=", 
+        RowBox[{"{", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", 
+           RowBox[{"ti", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", "alpha"}], "}"}], "}"}]}], 
+       ";", "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", "=", "1"}], ",", 
+         RowBox[{"i", "\[LessEqual]", "n"}], ",", 
+         RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"wi", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", "+", "1"}], "]"}], "]"}], "=", 
+           RowBox[{
+            RowBox[{"wi", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "+", 
+            RowBox[{"h", "*", 
+             RowBox[{"f", "[", 
+              RowBox[{
+               RowBox[{"ti", "[", 
+                RowBox[{"[", "i", "]"}], "]"}], ",", 
+               RowBox[{"wi", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}]}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"OutputDetails", "=", 
+           RowBox[{"Append", "[", 
+            RowBox[{"OutputDetails", ",", "\[IndentingNewLine]", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", 
+               RowBox[{"N", "[", 
+                RowBox[{"ti", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"i", "+", "1"}], "]"}], "]"}], "]"}], ",", 
+               RowBox[{"N", "[", 
+                RowBox[{"wi", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"i", "+", "1"}], "]"}], "]"}], "]"}]}], "}"}]}], 
+            "]"}]}], ";"}]}], "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Print", "[", 
+        RowBox[{"NumberForm", "[", 
+         RowBox[{
+          RowBox[{"TableForm", "[", 
+           RowBox[{"OutputDetails", ",", "\[IndentingNewLine]", 
+            RowBox[{"TableHeadings", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{"None", ",", 
+               RowBox[{"{", 
+                RowBox[{
+                "\"\<i\>\"", ",", 
+                 "\"\<\!\(\*SubscriptBox[\(t\), \(i\)]\)\>\"", ",", 
+                 "\"\<\!\(\*SubscriptBox[\(w\), \(i\)]\)\>\""}], "}"}]}], 
+              "}"}]}]}], "]"}], ",", "6"}], "]"}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<Subinterval size h used = \>\"", ",", "h"}], "]"}], 
+       ";"}]}], "\[IndentingNewLine]", "]"}]}], ";"}],
+  FontFamily->"Courier New",
+  FontSize->18], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"f", "[", 
+     RowBox[{"t_", ",", "x_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{"-", "2"}], "t", " ", 
+     RowBox[{"x", "^", "2"}]}]}], ";"}],
+  FontFamily->"Courier New",
+  FontSize->20], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"h", "=", "0.2"}], ";"}],
+  FontFamily->"Courier New",
+  FontSize->20], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"EulerMethod", "[", 
+    RowBox[{"0", ",", "1", ",", "h", ",", "f", ",", "1"}], "]"}], ";"}],
+  FontFamily->"Courier New",
+  FontSize->20]}], "Input",
+ CellChangeTimes->{{3.6170178204681935`*^9, 3.617017874308304*^9}, {
+  3.6170179085013695`*^9, 3.617017962563505*^9}, {3.8273059610944223`*^9, 
+  3.827306012872858*^9}},ExpressionUUID->"0f1cf44d-c913-47a5-be3b-\
+a90654acac2b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ TagBox[
+  TagBox[
+   TagBox[GridBox[{
+      {
+       TagBox["\<\"i\"\>",
+        HoldForm], 
+       TagBox["\<\"\\!\\(\\*SubscriptBox[\\(t\\), \\(i\\)]\\)\"\>",
+        HoldForm], 
+       TagBox["\<\"\\!\\(\\*SubscriptBox[\\(w\\), \\(i\\)]\\)\"\>",
+        HoldForm]},
+      {
+       InterpretationBox["\<\"0\"\>",
+        0,
+        Editable->False], 
+       InterpretationBox["\<\"0\"\>",
+        0,
+        Editable->False], 
+       InterpretationBox["\<\"1\"\>",
+        1,
+        Editable->False]},
+      {
+       InterpretationBox["\<\"1\"\>",
+        1,
+        Editable->False], 
+       InterpretationBox["\<\"0.2\"\>",
+        0.2,
+        AutoDelete->True], 
+       InterpretationBox["\<\"1.\"\>",
+        1.,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"2\"\>",
+        2,
+        Editable->False], 
+       InterpretationBox["\<\"0.4\"\>",
+        0.4,
+        AutoDelete->True], 
+       InterpretationBox["\<\"0.92\"\>",
+        0.9199999999999999,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"3\"\>",
+        3,
+        Editable->False], 
+       InterpretationBox["\<\"0.6\"\>",
+        0.6000000000000001,
+        AutoDelete->True], 
+       InterpretationBox["\<\"0.784576\"\>",
+        0.7845759999999999,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"4\"\>",
+        4,
+        Editable->False], 
+       InterpretationBox["\<\"0.8\"\>",
+        0.8,
+        AutoDelete->True], 
+       InterpretationBox["\<\"0.636842\"\>",
+        0.6368417200537599,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"5\"\>",
+        5,
+        Editable->False], 
+       InterpretationBox["\<\"1.\"\>",
+        1.,
+        AutoDelete->True], 
+       InterpretationBox["\<\"0.50706\"\>",
+        0.5070601596054298,
+        AutoDelete->True]}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+       "RowsIndexed" -> {}},
+     GridBoxDividers->{
+      "Columns" -> {{False}}, "ColumnsIndexed" -> {}, 
+       "Rows" -> {False, True, {False}, False}, "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.7]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    {None, OutputFormsDump`HeadedColumns}],
+   Function[BoxForm`e$, 
+    TableForm[
+    BoxForm`e$, 
+     TableHeadings -> {
+      None, {"i", "\!\(\*SubscriptBox[\(t\), \(i\)]\)", 
+        "\!\(\*SubscriptBox[\(w\), \(i\)]\)"}}]]],
+  NumberForm[#, 6]& ]], "Print",
+ CellChangeTimes->{{3.827306004425226*^9, 3.827306033794524*^9}, 
+   3.827306164121055*^9},ExpressionUUID->"6516d222-f0d7-4e80-ba96-\
+c874b62218eb"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Subinterval size h used = \"\>", "\[InvisibleSpace]", "0.2`"}],
+  SequenceForm["Subinterval size h used = ", 0.2],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.827306004425226*^9, 3.827306033794524*^9}, 
+   3.827306164125642*^9},ExpressionUUID->"6d41114b-5421-4608-837c-\
+92b8fe29b341"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{"h", "=", "0.1"}], ";"}],
+  FontSize->20]], "Input",
+ CellChangeTimes->{{3.8273061894063063`*^9, 
+  3.8273061900260744`*^9}},ExpressionUUID->"c29a6cf8-27b7-4baa-bf0c-\
+df456b87193c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{"EulerMethod", "[", 
+    RowBox[{"0", ",", "1", ",", "h", ",", "f", ",", "1"}], "]"}], ";"}],
+  FontFamily->"Courier New",
+  FontSize->20]], "Input",
+ CellChangeTimes->{{3.8273061455480914`*^9, 
+  3.827306146647306*^9}},ExpressionUUID->"564aaf48-4888-497a-bb7e-\
+71116ae5080f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ TagBox[
+  TagBox[
+   TagBox[GridBox[{
+      {
+       TagBox["\<\"i\"\>",
+        HoldForm], 
+       TagBox["\<\"\\!\\(\\*SubscriptBox[\\(t\\), \\(i\\)]\\)\"\>",
+        HoldForm], 
+       TagBox["\<\"\\!\\(\\*SubscriptBox[\\(w\\), \\(i\\)]\\)\"\>",
+        HoldForm]},
+      {
+       InterpretationBox["\<\"0\"\>",
+        0,
+        Editable->False], 
+       InterpretationBox["\<\"0\"\>",
+        0,
+        Editable->False], 
+       InterpretationBox["\<\"1\"\>",
+        1,
+        Editable->False]},
+      {
+       InterpretationBox["\<\"1\"\>",
+        1,
+        Editable->False], 
+       InterpretationBox["\<\"0.1\"\>",
+        0.1,
+        AutoDelete->True], 
+       InterpretationBox["\<\"1.\"\>",
+        1.,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"2\"\>",
+        2,
+        Editable->False], 
+       InterpretationBox["\<\"0.2\"\>",
+        0.2,
+        AutoDelete->True], 
+       InterpretationBox["\<\"0.98\"\>",
+        0.98,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"3\"\>",
+        3,
+        Editable->False], 
+       InterpretationBox["\<\"0.3\"\>",
+        0.30000000000000004`,
+        AutoDelete->True], 
+       InterpretationBox["\<\"0.941584\"\>",
+        0.941584,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"4\"\>",
+        4,
+        Editable->False], 
+       InterpretationBox["\<\"0.4\"\>",
+        0.4,
+        AutoDelete->True], 
+       InterpretationBox["\<\"0.888389\"\>",
+        0.88838917425664,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"5\"\>",
+        5,
+        Editable->False], 
+       InterpretationBox["\<\"0.5\"\>",
+        0.5,
+        AutoDelete->True], 
+       InterpretationBox["\<\"0.82525\"\>",
+        0.8252503482617284,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"6\"\>",
+        6,
+        Editable->False], 
+       InterpretationBox["\<\"0.6\"\>",
+        0.6000000000000001,
+        AutoDelete->True], 
+       InterpretationBox["\<\"0.757147\"\>",
+        0.757146534531118,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"7\"\>",
+        7,
+        Editable->False], 
+       InterpretationBox["\<\"0.7\"\>",
+        0.7000000000000001,
+        AutoDelete->True], 
+       InterpretationBox["\<\"0.688354\"\>",
+        0.6883540295608203,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"8\"\>",
+        8,
+        Editable->False], 
+       InterpretationBox["\<\"0.8\"\>",
+        0.8,
+        AutoDelete->True], 
+       InterpretationBox["\<\"0.622018\"\>",
+        0.6220176517590537,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"9\"\>",
+        9,
+        Editable->False], 
+       InterpretationBox["\<\"0.9\"\>",
+        0.9,
+        AutoDelete->True], 
+       InterpretationBox["\<\"0.560113\"\>",
+        0.5601126983030781,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"10\"\>",
+        10,
+        Editable->False], 
+       InterpretationBox["\<\"1.\"\>",
+        1.,
+        AutoDelete->True], 
+       InterpretationBox["\<\"0.503642\"\>",
+        0.5036419760390142,
+        AutoDelete->True]}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+       "RowsIndexed" -> {}},
+     GridBoxDividers->{
+      "Columns" -> {{False}}, "ColumnsIndexed" -> {}, 
+       "Rows" -> {False, True, {False}, False}, "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.7]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    {None, OutputFormsDump`HeadedColumns}],
+   Function[BoxForm`e$, 
+    TableForm[
+    BoxForm`e$, 
+     TableHeadings -> {
+      None, {"i", "\!\(\*SubscriptBox[\(t\), \(i\)]\)", 
+        "\!\(\*SubscriptBox[\(w\), \(i\)]\)"}}]]],
+  NumberForm[#, 6]& ]], "Print",
+ CellChangeTimes->{{3.8273061575459356`*^9, 
+  3.8273061924762087`*^9}},ExpressionUUID->"b2fb6255-c4f3-4296-8324-\
+9e12d007c3a0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Subinterval size h used = \"\>", "\[InvisibleSpace]", "0.1`"}],
+  SequenceForm["Subinterval size h used = ", 0.1],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.8273061575459356`*^9, 
+  3.827306192487547*^9}},ExpressionUUID->"0c4eb6a9-ea35-4a0e-b7c0-\
+e2f4d35abfd3"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[" ", "Text",
+ Editable->False,
+ Selectable->False,
+ CellFrame->{{0, 0}, {0, 2}},
+ ShowCellBracket->False,
+ CellMargins->{{0, 0}, {1, 1}},
+ CellElementSpacings->{"CellMinHeight"->1},
+ CellFrameMargins->0,
+ CellFrameColor->RGBColor[0, 0, 1],
+ CellSize->{
+  Inherited, 4},ExpressionUUID->"299d0aa7-c25b-44a1-b5a8-3be572d1ca55"]
+}, Open  ]]
+},
+WindowSize->{1366, 725},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 904, 18, 145, "Title",ExpressionUUID->"2d063ccc-2de1-4f66-8ad2-7efe8754879d"],
+Cell[1474, 42, 329, 10, 8, "Text",ExpressionUUID->"55fe1d48-1b01-49dd-963c-33e4c1d233a4"],
+Cell[1806, 54, 283, 6, 40, "Text",ExpressionUUID->"d9911d44-ea8f-4885-96c0-e46978ff53ed"],
+Cell[2092, 62, 1996, 53, 116, "Text",ExpressionUUID->"891f9fda-4c1a-4192-943c-381fa8be0fdb"],
+Cell[CellGroupData[{
+Cell[4113, 119, 4653, 128, 343, "Input",ExpressionUUID->"0f1cf44d-c913-47a5-be3b-a90654acac2b"],
+Cell[CellGroupData[{
+Cell[8791, 251, 2813, 95, 112, "Print",ExpressionUUID->"6516d222-f0d7-4e80-ba96-c874b62218eb"],
+Cell[11607, 348, 342, 7, 22, "Print",ExpressionUUID->"6d41114b-5421-4608-837c-92b8fe29b341"]
+}, Open  ]]
+}, Open  ]],
+Cell[11976, 359, 229, 7, 36, "Input",ExpressionUUID->"c29a6cf8-27b7-4baa-bf0c-df456b87193c"],
+Cell[CellGroupData[{
+Cell[12230, 370, 324, 9, 36, "Input",ExpressionUUID->"564aaf48-4888-497a-bb7e-71116ae5080f"],
+Cell[CellGroupData[{
+Cell[12579, 383, 4131, 145, 187, "Print",ExpressionUUID->"b2fb6255-c4f3-4296-8324-9e12d007c3a0"],
+Cell[16713, 530, 321, 7, 22, "Print",ExpressionUUID->"0c4eb6a9-ea35-4a0e-b7c0-e2f4d35abfd3"]
+}, Open  ]]
+}, Open  ]],
+Cell[17061, 541, 329, 10, 8, "Text",ExpressionUUID->"299d0aa7-c25b-44a1-b5a8-3be572d1ca55"]
+}, Open  ]]
+}
+]
+*)
+
