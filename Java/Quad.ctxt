@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=
+comment0.target=void\ main()
+comment1.params=q1\ q2\ q3
+comment1.target=void\ quad(double,\ double,\ double)
+comment2.params=
+comment2.target=void\ dis()
+comment3.params=
+comment3.target=void\ r1()
+comment4.params=
+comment4.target=void\ r2()
+comment5.params=
+comment5.target=void\ r3()
+comment6.params=
+comment6.target=void\ r4()
+numComments=7

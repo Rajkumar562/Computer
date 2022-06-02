@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=m1\ m2
+comment0.target=Merge(int,\ int)
+comment1.params=
+comment1.target=void\ merge()
+comment2.params=
+comment2.target=void\ main()
+numComments=3

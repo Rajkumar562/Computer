@@ -1,0 +1,6 @@
+import java.util.*;
+public class Print
+{
+    ArrayList <String>frt=new ArrayList<>();
+    
+}
